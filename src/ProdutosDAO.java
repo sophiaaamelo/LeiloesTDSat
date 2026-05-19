@@ -45,4 +45,18 @@ public class ProdutosDAO {
         }
         return listagem;
     }
+    // Metodo responsavel por atualizar o status do produto para Vendido
+public boolean venderProduto(Integer id) {
+    String sql = "UPDATE produtos SET status = 'Vendido' WHERE id = ?";
+    try {
+        conn = new conectaDAO().connectDB();
+        prep = conn.prepareStatement(sql);
+        prep.setInt(1, id);
+        prep.executeUpdate();
+        return true;
+    } catch (SQLException e) {
+        System.out.println("Erro ao vender: " + e.getMessage());
+        return false;
+    }
+}
 }
